@@ -55,7 +55,7 @@ public class ExpenseController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String saveExpense(Expense expense) {
 		Expense savedExpense = expenseService.save(expense);
-		return "redirect:/expense/show" + savedExpense.getId();
+		return "redirect:/expense/show/" + savedExpense.getId();
 	}
 
 	@RequestMapping("/delete/{id}")

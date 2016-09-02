@@ -12,12 +12,4 @@ import ro.sci.domain.Expense;
 
 public interface ExpenseService extends CrudService<Expense> {
 
-	// List<Expense> listAll();
-	//
-	// Expense getById(Integer id);
-	//
-	// Expense save(Expense expense);
-	//
-	// void delete(Integer id);
-
 }

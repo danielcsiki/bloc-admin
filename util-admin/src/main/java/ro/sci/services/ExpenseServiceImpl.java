@@ -40,8 +40,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
-	public Expense save(Expense abstractModel) {
-		return expenseRepository.save(abstractModel);
+	public Expense save(Expense expense) {
+		return expenseRepository.save(expense);
 	}
 
 	@Override
