@@ -28,14 +28,14 @@ public class ExpenseController {
 		this.expenseService = expenseService;
 	}
 
-	@RequestMapping({ "/list", "/" })
+	@RequestMapping("/list")
 	public String listExpenses(Model model) {
 		model.addAttribute("expenses", expenseService.listAll());
 		return "expense/list";
 	}
 
 	@RequestMapping("/show/{id}")
-	public String showExpense(@PathVariable Integer id, Model model) {
+	public String getExpense(@PathVariable Integer id, Model model) {
 		model.addAttribute("expense", expenseService.getById(id));
 		return "expense/show";
 	}
