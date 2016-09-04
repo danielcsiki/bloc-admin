@@ -9,21 +9,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ro.sci.domain.Expense;
-import ro.sci.repositories.ExpenseRepository;
+import ro.sci.domain.Apartment;
+import ro.sci.repositories.ApartmentRepository;
 
 /**
- * @author luff
+ * @author yellow
  *
  */
 @Service
-public class ExpenseServiceImpl implements ExpenseService {
+public class ApartmentServiceImpl implements ApartmentService {
 
-	private ExpenseRepository expenseRepository;
+	private ApartmentRepository apartmentRepository;
 
 	@Autowired
-	public void setExpenseRepository(ExpenseRepository expenseRepository) {
-		this.expenseRepository = expenseRepository;
+	public void setApartmentRepository(ApartmentRepository apartmentRepository) {
+		this.apartmentRepository = apartmentRepository;
 	}
 
 	/*
@@ -33,9 +33,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 */
 	@Override
 	public List<?> listAll() {
-		List<Expense> expenses = new ArrayList<>();
-		expenseRepository.findAll().forEach(expenses::add);
-		return expenses;
+		List<Apartment> apartments = new ArrayList<>();
+		apartmentRepository.findAll().forEach(apartments::add);
+		return apartments;
 	}
 
 	/*
@@ -44,8 +44,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 * @see ro.sci.services.CrudService#getById(java.lang.Integer)
 	 */
 	@Override
-	public Expense getById(Integer id) {
-		return expenseRepository.findOne(id);
+	public Apartment getById(Integer id) {
+		return apartmentRepository.findOne(id);
 	}
 
 	/*
@@ -54,8 +54,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 * @see ro.sci.services.CrudService#save(java.lang.Object)
 	 */
 	@Override
-	public Expense save(Expense expense) {
-		return expenseRepository.save(expense);
+	public Apartment save(Apartment apartment) {
+		return apartmentRepository.save(apartment);
 	}
 
 	/*
@@ -65,7 +65,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 */
 	@Override
 	public void delete(Integer id) {
-		expenseRepository.delete(id);
+		apartmentRepository.delete(id);
 	}
 
 }
