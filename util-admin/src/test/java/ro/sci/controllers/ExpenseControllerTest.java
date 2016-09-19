@@ -104,28 +104,25 @@ public class ExpenseControllerTest {
 
 		Integer id = 1;
 		String item = "salubritate";
-		String calcReference = "rezident";
-		Integer calcQuantum = 4;
-		Float pricePerCalcQuantum = (float) 6.88;
+		String unitReference = "rezident";
+		Float unitPrice = (float) 6.88;
 
 		Expense expense = new Expense();
 		expense.setId(id);
 		expense.setItem(item);
-		expense.setCalcReference(calcReference);
-		expense.setCalcQuantum(calcQuantum);
-		expense.setPricePerCalcQuantum(pricePerCalcQuantum);
+		expense.setUnitReference(unitReference);
+		expense.setUnitPrice(unitPrice);
 
 		when(expenseService.save(Matchers.<Expense> any())).thenReturn(expense);
 
 		mockMvc.perform(post("/expense").param("id", "1").param("item", "salubritate")
-				.param("calcReference", "rezident").param("calcQuantum", "4").param("pricePerCalcQuantum", "6.88"))
-				.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/expense/show/1"))
+				.param("unitReference", "rezident").param("unitPrice", "6.88")).andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/expense/show/1"))
 				.andExpect(model().attribute("expense", instanceOf(Expense.class)))
 				.andExpect(model().attribute("expense", hasProperty("id", is(id))))
 				.andExpect(model().attribute("expense", hasProperty("item", is(item))))
-				.andExpect(model().attribute("expense", hasProperty("calcReference", is(calcReference))))
-				.andExpect(model().attribute("expense", hasProperty("calcQuantum", is(calcQuantum))))
-				.andExpect(model().attribute("expense", hasProperty("pricePerCalcQuantum", is(pricePerCalcQuantum))));
+				.andExpect(model().attribute("expense", hasProperty("unitReference", is(unitReference))))
+				.andExpect(model().attribute("expense", hasProperty("unitPrice", is(unitPrice))));
 
 		// verify properties of bound object
 		ArgumentCaptor<Expense> boundExpense = ArgumentCaptor.forClass(Expense.class);
@@ -133,9 +130,8 @@ public class ExpenseControllerTest {
 
 		assertEquals(id, boundExpense.getValue().getId());
 		assertEquals(item, boundExpense.getValue().getItem());
-		assertEquals(calcReference, boundExpense.getValue().getCalcReference());
-		assertEquals(calcQuantum, boundExpense.getValue().getCalcQuantum());
-		assertEquals(pricePerCalcQuantum, boundExpense.getValue().getPricePerCalcQuantum());
+		assertEquals(unitReference, boundExpense.getValue().getUnitReference());
+		assertEquals(unitPrice, boundExpense.getValue().getUnitPrice());
 	}
 
 	@Test

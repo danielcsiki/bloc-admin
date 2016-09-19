@@ -32,31 +32,25 @@
                  <div class="form-group"> 
                      <label class="col-sm-2 control-label">Id:</label> 
                      <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.id}">Expense Id</p> 
+                         <p class="form-control-static" th:text="${expense.id}">Id</p> 
                      </div> 
                  </div> 
                  <div class="form-group"> 
                      <label class="col-sm-2 control-label">Item:</label> 
                      <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.item}">Expense Item</p> 
+                         <p class="form-control-static" th:text="${expense.item}">Item</p> 
                      </div> 
                  </div> 
                  <div class="form-group"> 
-                     <label class="col-sm-2 control-label">Reference:</label> 
+                     <label class="col-sm-2 control-label">Unit Reference:</label> 
                      <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.calcReference}">CalcReference</p> 
+                         <p class="form-control-static" th:text="${expense.unitReference}">Unit Reference</p> 
                      </div> 
                  </div> 
                  <div class="form-group"> 
-                     <label class="col-sm-2 control-label">Quantum:</label> 
+                     <label class="col-sm-2 control-label">Unit Price:</label> 
                      <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.calcQuantum}">CalcQuantum</p> 
-                     </div> 
-                 </div>
-                 <div class="form-group"> 
-                     <label class="col-sm-2 control-label">Price:</label> 
-                     <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.pricePerCalcQuantum}">PricePerCalcQuantum</p> 
+                         <p class="form-control-static" th:text="${expense.unitPrice}">Unit Price</p> 
                      </div> 
                  </div> 
              </form> 

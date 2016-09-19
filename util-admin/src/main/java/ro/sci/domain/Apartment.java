@@ -3,7 +3,9 @@
  */
 package ro.sci.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  * @author yellow
@@ -13,12 +15,21 @@ import javax.persistence.Entity;
 public class Apartment extends AbstractModel {
 
 	private Integer nr;
+
 	private Integer nrResidents;
+
 	private String firstName;
+
 	private String lastName;
+
 	private String email;
+
 	private String phoneNumber;
+
 	private String address;
+
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	private User user;
 
 	public Integer getNr() {
 		return nr;
@@ -74,6 +85,15 @@ public class Apartment extends AbstractModel {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+		// user.setApartment(this);
 	}
 
 }

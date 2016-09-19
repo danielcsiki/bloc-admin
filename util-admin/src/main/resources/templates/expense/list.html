@@ -25,9 +25,8 @@
              <tr> 
                  <th>Id</th> 
                  <th>Item</th> 
-                 <th>CalcReference</th> 
-                 <th>CalcQuantum</th>
-                 <th>PricePerCalcQuantum</th>
+                 <th>Unit Reference</th> 
+                 <th>Unit Price</th>
                  <th>View</th>
                  <th>Edit</th>
                  <th>Delete</th> 
@@ -35,9 +34,8 @@
              <tr th:each="expense : ${expenses}"> 
                  <td th:text="${expense.id}"></td> 
                  <td th:text="${expense.item}"></td> 
-                 <td th:text="${expense.calcReference}"></td> 
-                 <td th:text="${expense.calcQuantum}"></td>
-                 <td th:text="${expense.pricePerCalcQuantum}"></td>
+                 <td th:text="${expense.unitReference}"></td> 
+                 <td th:text="${expense.unitPrice}"></td>
                  <td><a th:href="${'/expense/show/' + expense.id}">View</a> </td>
                  <td><a th:href="${'/expense/edit/' + expense.id}">Edit</a> </td>
                  <td><a th:href="${'/expense/delete/' + expense.id}">Delete</a> </td> 

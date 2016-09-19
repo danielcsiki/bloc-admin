@@ -12,4 +12,6 @@ import ro.sci.domain.Apartment;
 
 public interface ApartmentService extends CrudService<Apartment> {
 
+	// Apartment saveApartmentForm(ApartmentForm apartmentForm);
+
 }

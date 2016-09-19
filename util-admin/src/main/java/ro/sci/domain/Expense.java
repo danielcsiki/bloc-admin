@@ -13,9 +13,8 @@ import javax.persistence.Entity;
 public class Expense extends AbstractModel {
 
 	private String item;
-	private String calcReference;
-	private Integer calcQuantum;
-	private Float pricePerCalcQuantum;
+	private String unitReference;
+	private Float unitPrice;
 
 	public String getItem() {
 		return item;
@@ -25,28 +24,20 @@ public class Expense extends AbstractModel {
 		this.item = item;
 	}
 
-	public String getCalcReference() {
-		return calcReference;
+	public String getUnitReference() {
+		return unitReference;
 	}
 
-	public void setCalcReference(String calcReference) {
-		this.calcReference = calcReference;
+	public void setUnitReference(String unitReference) {
+		this.unitReference = unitReference;
 	}
 
-	public Integer getCalcQuantum() {
-		return calcQuantum;
+	public Float getUnitPrice() {
+		return unitPrice;
 	}
 
-	public void setCalcQuantum(Integer calcQuantum) {
-		this.calcQuantum = calcQuantum;
-	}
-
-	public Float getPricePerCalcQuantum() {
-		return pricePerCalcQuantum;
-	}
-
-	public void setPricePerCalcQuantum(Float pricePerCalcQuantum) {
-		this.pricePerCalcQuantum = pricePerCalcQuantum;
+	public void setUnitPrice(Float unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 }

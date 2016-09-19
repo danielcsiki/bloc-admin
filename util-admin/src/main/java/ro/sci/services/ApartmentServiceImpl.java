@@ -21,10 +21,18 @@ public class ApartmentServiceImpl implements ApartmentService {
 
 	private ApartmentRepository apartmentRepository;
 
+	// private ApartmentFormToApartment apartmentFormToApartment;
+
 	@Autowired
 	public void setApartmentRepository(ApartmentRepository apartmentRepository) {
 		this.apartmentRepository = apartmentRepository;
 	}
+
+	// @Autowired
+	// public void setApartmentFormToApartment(ApartmentFormToApartment
+	// apartmentFormToApartment) {
+	// this.apartmentFormToApartment = apartmentFormToApartment;
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -32,7 +40,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 	 * @see ro.sci.services.CrudService#listAll()
 	 */
 	@Override
-	public List<?> listAll() {
+	public List<Apartment> listAll() {
 		List<Apartment> apartments = new ArrayList<>();
 		apartmentRepository.findAll().forEach(apartments::add);
 		return apartments;
@@ -67,5 +75,23 @@ public class ApartmentServiceImpl implements ApartmentService {
 	public void delete(Integer id) {
 		apartmentRepository.delete(id);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ro.sci.services.ApartmentService#saveApartmentForm(java.lang.Object)
+	 */
+	// @Override
+	// public Apartment saveApartmentForm(ApartmentForm apartmentForm) {
+	//
+	// Apartment newApartment = apartmentFormToApartment.convert(apartmentForm);
+	//
+	// if (newApartment.getUser().getId() != null) {
+	// Apartment existingApartment = getById(newApartment.getId());
+	// newApartment.getUser().setEnabled(existingApartment.getUser().getEnabled());
+	// }
+	//
+	// return save(newApartment);
+	// }
 
 }

@@ -27,5 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/luff/Downloads/jasypt-1.9.2-dist/jasypt-1.9.2/lib/jasypt-1.9.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

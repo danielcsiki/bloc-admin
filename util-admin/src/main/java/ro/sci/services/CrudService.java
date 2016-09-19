@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface CrudService<T> {
 
-	List<?> listAll();
+	List<T> listAll();
 
 	T getById(Integer id);
 

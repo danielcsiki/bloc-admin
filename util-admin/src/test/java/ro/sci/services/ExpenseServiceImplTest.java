@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ro.sci.config.JpaIntegrationConfig;
 import ro.sci.domain.Expense;
-import ro.sci.repositories.ExpenseRepository;
 
 /**
  * @author luff
@@ -28,11 +27,11 @@ import ro.sci.repositories.ExpenseRepository;
 @SpringApplicationConfiguration(JpaIntegrationConfig.class)
 public class ExpenseServiceImplTest {
 
-	private ExpenseRepository expenseRepository;
+	private ExpenseService expenseService;
 
 	@Autowired
-	public void setExpenseRepository(ExpenseRepository expenseRepository) {
-		this.expenseRepository = expenseRepository;
+	public void setExpenseRepository(ExpenseService expenseService) {
+		this.expenseService = expenseService;
 	}
 
 	@Test
@@ -40,15 +39,14 @@ public class ExpenseServiceImplTest {
 
 		Expense expense = new Expense();
 		expense.setItem("fond reparatii");
-		expense.setCalcReference("apartament");
-		expense.setCalcQuantum(1);
-		expense.setPricePerCalcQuantum((float) 10.00);
+		expense.setUnitReference("apartament");
+		expense.setUnitPrice((float) 10.00);
 
 		assertNull(expense.getId()); // null before save
-		expenseRepository.save(expense);
+		expenseService.save(expense);
 		assertNotNull(expense.getId()); // not null after save
 
-		Expense fetchedExpense = expenseRepository.findOne(expense.getId());
+		Expense fetchedExpense = expenseService.getById(expense.getId());
 
 		assertNotNull(fetchedExpense);
 
@@ -57,17 +55,14 @@ public class ExpenseServiceImplTest {
 
 		// update description and save
 		fetchedExpense.setItem("belea");
-		expenseRepository.save(fetchedExpense);
+		expenseService.save(fetchedExpense);
 
 		// get from DB, should be updated
-		Expense fetchedUpdatedExpense = expenseRepository.findOne(fetchedExpense.getId());
+		Expense fetchedUpdatedExpense = expenseService.getById(fetchedExpense.getId());
 		assertEquals(fetchedExpense.getItem(), fetchedUpdatedExpense.getItem());
 
-		long expenseCount = expenseRepository.count();
-		assertEquals(expenseCount, 4);
-
-		List<Expense> expenses = (List<Expense>) expenseRepository.findAll();
-		assert expenses.size() == 4;
+		List<Expense> expenses = expenseService.listAll();
+		assert expenses.size() == 4;// see JpaDataLoader...
 
 	}
 

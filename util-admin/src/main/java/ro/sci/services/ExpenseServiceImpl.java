@@ -32,7 +32,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 * @see ro.sci.services.CrudService#listAll()
 	 */
 	@Override
-	public List<?> listAll() {
+	public List<Expense> listAll() {
 		List<Expense> expenses = new ArrayList<>();
 		expenseRepository.findAll().forEach(expenses::add);
 		return expenses;
