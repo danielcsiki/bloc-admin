@@ -71,28 +71,71 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 	private void loadExpenses() {
 
 		Expense expense1 = new Expense();
-		expense1.setItem("apa rece");
-		expense1.setUnitReference("index contor");
+		expense1.setItem("Apa rece");
+		expense1.setUnitReference("Index contor");
 		expense1.setUnitPrice(2.87f);
 		expenseService.save(expense1);
 
 		Expense expense2 = new Expense();
-		expense2.setItem("apa pluviala");
-		expense2.setUnitReference("apartament");
+		expense2.setItem("Apa pluviala");
+		expense2.setUnitReference("Apartament");
 		expense2.setUnitPrice(3.28f);
 		expenseService.save(expense2);
 
 		Expense expense3 = new Expense();
-		expense3.setItem("salubritate");
-		expense3.setUnitReference("rezident");
+		expense3.setItem("Salubritate");
+		expense3.setUnitReference("Persoane");
 		expense3.setUnitPrice(6.88f);
 		expenseService.save(expense3);
 
 		Expense expense4 = new Expense();
-		expense4.setItem("servicii administrative");
-		expense4.setUnitReference("apartament");
+		expense4.setItem("Servicii administrative");
+		expense4.setUnitReference("Apartament");
 		expense4.setUnitPrice(11.00f);
 		expenseService.save(expense4);
+		
+		Expense expense5 = new Expense();
+		expense5.setItem("Apa canal");
+		expense5.setUnitReference("Index contor");
+		expense5.setUnitPrice(3.35f);
+		expenseService.save(expense5);
+		
+		Expense expense6 = new Expense();
+		expense6.setItem("Taxa speciala apa");
+		expense6.setUnitReference("Index contor");
+		expense6.setUnitPrice(0.07f);
+		expenseService.save(expense6);
+		
+		Expense expense7 = new Expense();
+		expense7.setItem("Energie electrica");
+		expense7.setUnitReference("Persoane");
+		expense7.setUnitPrice(0.30f);
+		expenseService.save(expense7);
+		
+		Expense expense8 = new Expense();
+		expense8.setItem("Servicii de curatenie");
+		expense8.setUnitReference("Apartament");
+		expense8.setUnitPrice(8.49f);
+		expenseService.save(expense8);
+		
+		Expense expense9 = new Expense();
+		expense9.setItem("Salar presedinte");
+		expense9.setUnitReference("Apartament");
+		expense9.setUnitPrice(9.78f);
+		expenseService.save(expense9);
+		
+		Expense expense10 = new Expense();
+		expense10.setItem("Fond reparatii");
+		expense10.setUnitReference("Apartament");
+		expense10.setUnitPrice(10.00f);
+		expenseService.save(expense10);
+		
+		Expense expense11 = new Expense();
+		expense11.setItem("Altele");
+		expense11.setUnitReference("Apartament");
+		expense11.setUnitPrice(0.27f);
+		expenseService.save(expense11);
+		
 
 	}
 
