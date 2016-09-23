@@ -15,19 +15,12 @@ import javax.persistence.OneToOne;
 public class Apartment extends AbstractModel {
 
 	private Integer nr;
-
 	private Integer nrResidents;
-
 	private String firstName;
-
 	private String lastName;
-
 	private String email;
-
 	private String phoneNumber;
-
 	private String address;
-
 	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	private User user;
 

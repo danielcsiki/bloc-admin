@@ -4,6 +4,9 @@
 package ro.sci.domain;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author luff
@@ -12,8 +15,11 @@ import javax.persistence.Entity;
 @Entity
 public class Expense extends AbstractModel {
 
+	@NotEmpty
 	private String item;
+	@NotEmpty
 	private String unitReference;
+	@NotNull
 	private Float unitPrice;
 
 	public String getItem() {

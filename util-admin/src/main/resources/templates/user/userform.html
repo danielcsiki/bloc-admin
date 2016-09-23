@@ -19,80 +19,109 @@
 </head> 
 <body> 
 <div class="container"> 
+
      <h2>User</h2> 
      <div> 
-         <form class="form-horizontal" th:object="${user}" th:action="@{/user}" method="post">
-          
-             <input type="hidden" th:field="*{id}"/> 
-             <input type="hidden" th:field="*{version}"/> 
-             <input type="hidden" th:field="*{apartment.id}"/> 
-             <input type="hidden" th:field="*{apartment.version}"/> 
-             
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">User Name:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="text" class="form-control" th:field="*{username}"/> 
-                 </div> 
-             </div> 
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">Password:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="password" name="password" class="form-control"/> 
-                 </div> 
-             </div>
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">Password Conf:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="password" name="password" class="form-control"/> 
-                 </div> 
-             </div>  
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">Apartment Nr:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="text" class="form-control" th:field="*{apartment.nr}"/> 
-                 </div> 
-             </div>
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">Nr Residents:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="text" class="form-control" th:field="*{apartment.nrResidents}"/> 
-                 </div> 
-             </div>
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">First Name:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="text" class="form-control" th:field="*{apartment.firstName}"/> 
-                 </div> 
-             </div> 
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">Last Name:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="text" class="form-control" th:field="*{apartment.lastName}"/> 
-                 </div> 
-             </div> 
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">Email:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="text" class="form-control" th:field="*{apartment.email}"/> 
-                 </div> 
-             </div> 
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">Phone:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="text" class="form-control" th:field="*{apartment.phoneNumber}"/> 
-                 </div> 
-             </div>
-             <div class="form-group"> 
-                 <label class="col-sm-2 control-label">Address:</label> 
-                 <div class="col-sm-10"> 
-                     <input type="text" class="form-control" th:field="*{apartment.address}"/> 
-                 </div> 
-             </div>
+         <form class="form-horizontal" th:object="${userForm}" th:action="@{/user}" method="post">
+                                 
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <p>Please correct values in error below:</p>
+            </div>
+            
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{version}"/>
+            <input type="hidden" th:field="*{apartmentId}"/>
+            <input type="hidden" th:field="*{apartmentVersion}"/>     
+                      
+            <div class="form-group"  th:class="${#fields.hasErrors('username')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">User Name:</label>
+                <div class="col-sm-10 ">
+                    <input type="text" class="form-control" th:field="*{username}" th:errorclass="has-error"/>
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('username')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" th:class="${#fields.hasErrors('passwordText')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Password:</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" th:field="*{passwordText}" th:errorclass="has-error"/>
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('passwordText')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" th:class="${#fields.hasErrors('passwordTextConf')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Password Conf:</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" th:field="*{passwordTextConf}" th:errorclass="has-error"/>
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('passwordTextConf')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Apartment Nr:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{nr}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Nr Residents:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{nrResidents}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">First Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{firstName}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Last Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{lastName}"/>
+                </div>
+            </div>
+                        
+            <div class="form-group" th:class="${#fields.hasErrors('email')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Email:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{email}" th:errorclass="has-error"/>
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('email')}" th:text="${err}" />
+                       </ul>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Phone:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{phoneNumber}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Address:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{address}"/>
+                </div>
+            </div>  
+   
              <div class="row"> 
                  <button type="submit" class="btn btn-default">Submit</button> 
              </div> 
          </form> 
      </div> 
 </div> 
-</body> 
+ 
+ </body> 
 </html> 

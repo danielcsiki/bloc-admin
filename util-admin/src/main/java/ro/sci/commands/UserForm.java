@@ -10,12 +10,12 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author yellow
  *
  */
-public class ApartmentForm {
+public class UserForm {
 
 	private Integer id;
 	private Integer version;
-	private Integer userId;
-	private Integer userVersion;
+	private Integer apartmentId;
+	private Integer apartmentVersion;
 	@NotEmpty
 	private String username;
 	@NotEmpty
@@ -48,20 +48,20 @@ public class ApartmentForm {
 		this.version = version;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Integer getApartmentId() {
+		return apartmentId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setApartmentId(Integer apartmentId) {
+		this.apartmentId = apartmentId;
 	}
 
-	public Integer getUserVersion() {
-		return userVersion;
+	public Integer getApartmentVersion() {
+		return apartmentVersion;
 	}
 
-	public void setUserVersion(Integer userVersion) {
-		this.userVersion = userVersion;
+	public void setApartmentVersion(Integer apartmentVersion) {
+		this.apartmentVersion = apartmentVersion;
 	}
 
 	public String getUsername() {

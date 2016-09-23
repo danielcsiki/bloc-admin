@@ -9,6 +9,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ro.sci.commands.UserForm;
+import ro.sci.converters.UserFormToUser;
+import ro.sci.converters.UserToUserForm;
 import ro.sci.domain.User;
 import ro.sci.repositories.UserRepository;
 import ro.sci.services.security.EncryptionService;
@@ -22,16 +25,29 @@ public class UserServiceImpl implements UserService {
 
 	private UserRepository userRepository;
 
+	private EncryptionService encryptionService;
+
+	private UserFormToUser userFormToUser;
+	private UserToUserForm userToUserForm;
+
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
-	private EncryptionService encryptionService;
-
 	@Autowired
 	public void setEncryptionService(EncryptionService encryptionService) {
 		this.encryptionService = encryptionService;
+	}
+
+	@Autowired
+	public void setUserFormToUser(UserFormToUser userFormToUser) {
+		this.userFormToUser = userFormToUser;
+	}
+
+	@Autowired
+	public void setUserToUserForm(UserToUserForm userToUserForm) {
+		this.userToUserForm = userToUserForm;
 	}
 
 	/*
@@ -78,6 +94,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void delete(Integer id) {
 		userRepository.delete(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ro.sci.services.UserService#saveUserForm(java.lang.Object)
+	 */
+	@Override
+	public UserForm saveUserForm(UserForm userForm) {
+		User newUser = userFormToUser.convert(userForm);
+		if (newUser.getId() != null) {
+			User storedUser = this.getById(newUser.getId());
+			return userToUserForm.convert(this.save(storedUser));
+		} else {
+			return userToUserForm.convert(this.save(newUser));
+		}
 	}
 
 }

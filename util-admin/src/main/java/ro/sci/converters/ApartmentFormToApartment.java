@@ -22,15 +22,14 @@ public class ApartmentFormToApartment implements Converter<ApartmentForm, Apartm
 
 		Apartment apartment = new Apartment();
 
-		apartment.setId(apartmentForm.getId());
-		apartment.setVersion(apartmentForm.getVersion());
-
 		apartment.setUser(new User());
 		apartment.getUser().setId(apartmentForm.getUserId());
 		apartment.getUser().setVersion(apartmentForm.getUserVersion());
 		apartment.getUser().setUsername(apartmentForm.getUsername());
 		apartment.getUser().setPassword(apartmentForm.getPasswordText());
 
+		apartment.setId(apartmentForm.getId());
+		apartment.setVersion(apartmentForm.getVersion());
 		apartment.setNr(apartmentForm.getNr());
 		apartment.setNrResidents(apartmentForm.getNrResidents());
 		apartment.setFirstName(apartmentForm.getFirstName());

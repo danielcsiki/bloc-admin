@@ -3,9 +3,12 @@
  */
 package ro.sci.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,7 +56,10 @@ public class ExpenseController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveExpense(Expense expense) {
+	public String saveExpense(@Valid Expense expense, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "expense/expenseform";
+		}
 		Expense savedExpense = expenseService.save(expense);
 		return "redirect:/expense/show/" + savedExpense.getId();
 	}

@@ -3,14 +3,20 @@
  */
 package ro.sci.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ro.sci.domain.User;
+import ro.sci.commands.UserForm;
+import ro.sci.commands.validators.UserFormValidator;
+import ro.sci.converters.UserToUserForm;
 import ro.sci.services.UserService;
 
 /**
@@ -23,9 +29,23 @@ public class UserController {
 
 	private UserService userService;
 
+	private UserToUserForm userToUserForm;
+	private UserFormValidator userFormValidator;
+
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	@Autowired
+	public void setUserToUserForm(UserToUserForm userToUserForm) {
+		this.userToUserForm = userToUserForm;
+	}
+
+	@Autowired
+	@Qualifier("userFormValidator")
+	public void setUserFormValidator(UserFormValidator userFormValidator) {
+		this.userFormValidator = userFormValidator;
 	}
 
 	@RequestMapping("/list")
@@ -42,19 +62,23 @@ public class UserController {
 
 	@RequestMapping("/edit/{id}")
 	public String editUser(@PathVariable Integer id, Model model) {
-		model.addAttribute("user", userService.getById(id));
+		model.addAttribute("userForm", userToUserForm.convert(userService.getById(id)));
 		return "user/userform";
 	}
 
 	@RequestMapping("/add")
 	public String addUser(Model model) {
-		model.addAttribute("user", new User());
+		model.addAttribute("userForm", new UserForm());
 		return "user/userform";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveUser(User user) {
-		User savedUser = userService.save(user);
+	public String saveUser(@Valid UserForm userForm, BindingResult bindingResult) {
+		userFormValidator.validate(userForm, bindingResult);
+		if (bindingResult.hasErrors()) {
+			return "user/userform";
+		}
+		UserForm savedUser = userService.saveUserForm(userForm);
 		return "redirect:/user/show/" + savedUser.getId();
 	}
 

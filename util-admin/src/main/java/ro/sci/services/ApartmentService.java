@@ -3,6 +3,7 @@
  */
 package ro.sci.services;
 
+import ro.sci.commands.ApartmentForm;
 import ro.sci.domain.Apartment;
 
 /**
@@ -12,6 +13,6 @@ import ro.sci.domain.Apartment;
 
 public interface ApartmentService extends CrudService<Apartment> {
 
-	// Apartment saveApartmentForm(ApartmentForm apartmentForm);
+	ApartmentForm saveApartmentForm(ApartmentForm apartmentForm);
 
 }

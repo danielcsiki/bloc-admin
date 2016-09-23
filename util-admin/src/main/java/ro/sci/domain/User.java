@@ -24,26 +24,16 @@ import ro.sci.domain.security.Role;
 public class User extends AbstractModel {
 
 	private String username;
-
 	@Transient
 	private String password;
-
-	@Transient
-	private String passwordConf;
-
 	private String encryptedPassword;
-
 	private Boolean enabled = true;
-
 	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	private Apartment apartment;
-
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Charge charge;
-
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Finance finance;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable
 	private List<Role> roles = new ArrayList<>();
@@ -62,14 +52,6 @@ public class User extends AbstractModel {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPasswordConf() {
-		return passwordConf;
-	}
-
-	public void setPasswordConf(String passwordConf) {
-		this.passwordConf = passwordConf;
 	}
 
 	public String getEncryptedPassword() {

@@ -9,6 +9,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ro.sci.commands.ApartmentForm;
+import ro.sci.converters.ApartmentFormToApartment;
+import ro.sci.converters.ApartmentToApartmentForm;
 import ro.sci.domain.Apartment;
 import ro.sci.repositories.ApartmentRepository;
 
@@ -21,18 +24,23 @@ public class ApartmentServiceImpl implements ApartmentService {
 
 	private ApartmentRepository apartmentRepository;
 
-	// private ApartmentFormToApartment apartmentFormToApartment;
+	private ApartmentFormToApartment apartmentFormToApartment;
+	private ApartmentToApartmentForm apartmentToApartmentForm;
 
 	@Autowired
 	public void setApartmentRepository(ApartmentRepository apartmentRepository) {
 		this.apartmentRepository = apartmentRepository;
 	}
 
-	// @Autowired
-	// public void setApartmentFormToApartment(ApartmentFormToApartment
-	// apartmentFormToApartment) {
-	// this.apartmentFormToApartment = apartmentFormToApartment;
-	// }
+	@Autowired
+	public void setApartmentFormToApartment(ApartmentFormToApartment apartmentFormToApartment) {
+		this.apartmentFormToApartment = apartmentFormToApartment;
+	}
+
+	@Autowired
+	public void setApartmentToApartmentForm(ApartmentToApartmentForm apartmentToApartmentForm) {
+		this.apartmentToApartmentForm = apartmentToApartmentForm;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -81,17 +89,14 @@ public class ApartmentServiceImpl implements ApartmentService {
 	 * 
 	 * @see ro.sci.services.ApartmentService#saveApartmentForm(java.lang.Object)
 	 */
-	// @Override
-	// public Apartment saveApartmentForm(ApartmentForm apartmentForm) {
-	//
-	// Apartment newApartment = apartmentFormToApartment.convert(apartmentForm);
-	//
-	// if (newApartment.getUser().getId() != null) {
-	// Apartment existingApartment = getById(newApartment.getId());
-	// newApartment.getUser().setEnabled(existingApartment.getUser().getEnabled());
-	// }
-	//
-	// return save(newApartment);
-	// }
+	@Override
+	public ApartmentForm saveApartmentForm(ApartmentForm apartmentForm) {
+		Apartment newApartment = apartmentFormToApartment.convert(apartmentForm);
+		if (newApartment.getUser().getId() != null) {
+			Apartment storedApartment = this.getById(newApartment.getId());
+			newApartment.getUser().setEnabled(storedApartment.getUser().getEnabled());
+		}
+		return apartmentToApartmentForm.convert(this.save(newApartment));
+	}
 
 }
