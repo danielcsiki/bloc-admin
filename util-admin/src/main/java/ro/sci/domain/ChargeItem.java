@@ -21,7 +21,7 @@ public class ChargeItem extends AbstractModel {
 	private Charge charge;
 
 	@OneToOne
-	
+	@NotEmpty
 	private Expense expense;
 	@NotNull
 	private Integer amount;
