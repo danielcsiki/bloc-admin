@@ -20,13 +20,9 @@ import javax.persistence.OneToOne;
 public class Finance extends AbstractModel {
 
 	private Date chargeDate;
-
 	private Float chargeSum;
-
 	private Float payment;
-
 	private Float balance;
-
 	@OneToOne
 	private User user;
 
