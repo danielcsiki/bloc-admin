@@ -6,6 +6,9 @@ package ro.sci.domain;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author yellow
@@ -18,8 +21,9 @@ public class ChargeItem extends AbstractModel {
 	private Charge charge;
 
 	@OneToOne
+	
 	private Expense expense;
-
+	@NotNull
 	private Integer amount;
 
 	private Float cost;

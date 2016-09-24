@@ -23,44 +23,40 @@
  
      <div class="row"> 
          <div class="col-sm-6"> 
-             <h2>Expense</h2> 
+             <h2>Expense added:</h2> 
          </div> 
      </div> 
-     <div class="row"> 
-         <div class="col-sm-10"> 
-             <form class="form-horizontal"> 
-                 <div class="form-group"> 
-                     <label class="col-sm-2 control-label">Id:</label> 
-                     <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.id}">Id</p> 
-                     </div> 
-                 </div> 
-                 <div class="form-group"> 
-                     <label class="col-sm-2 control-label">Item:</label> 
-                     <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.item}">Item</p> 
-                     </div> 
-                 </div> 
-                 <div class="form-group"> 
-                     <label class="col-sm-2 control-label">Unit Reference:</label> 
-                     <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.unitReference}">Unit Reference</p> 
-                     </div> 
-                 </div> 
-                 <div class="form-group"> 
-                     <label class="col-sm-2 control-label">Unit Price:</label> 
-                     <div class="col-sm-10"> 
-                         <p class="form-control-static" th:text="${expense.unitPrice}">Unit Price</p> 
-                     </div> 
-                 </div> 
-             </form> 
-         </div> 
-     </div>
-     <div class="row"> 
-             <a href="/expense/list"><button type="button" class="btn btn-primary">Back to Expense List</button></a> 
-     </div> 
-</div> 
- 
- 
+     
+<div class="col-sm-4">  
+ <table class="table table-striped">
+  <tbody>
+    <tr>
+      
+      <td><label class=".col-md-4 control-label">Id:</label> </td>
+      <td><p th:text="${expense.id}">Id</p></td>
+      
+    </tr>
+    <tr>
+      
+      <td><label class=".col-md-4 control-label">Item:</label> </td>
+      <td><p th:text="${expense.item}">Item</p></td>
+    </tr>
+    <tr>
+      
+      <td><label class=".col-md-4 control-label">Unit Reference:</label> </td>
+      <td><p th:text="${expense.unitReference}">Unit Reference</p></td>
+    </tr>
+    <tr>
+      
+      <td><label class=".col-md-4 control-label">Unit Price:</label> </td>
+      <td><p th:text="${expense.unitPrice}">Unit Price</p></td>
+    </tr>
+  </tbody>
+ </table>
+ <div class="row"> 
+     <a href="/expense/list"><button type="button" class="btn btn-primary">Expense List</button></a> 
+ </div> 
+  </div>
+ </div> 
 </body> 
 </html> 
