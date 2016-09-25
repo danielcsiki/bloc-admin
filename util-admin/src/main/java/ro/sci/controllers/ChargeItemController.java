@@ -21,7 +21,7 @@ import ro.sci.services.ChargeItemService;
  *
  */
 @Controller
-@RequestMapping("/user/chargeItem")
+@RequestMapping(value = "/user/chargeItem", method = RequestMethod.GET)
 public class ChargeItemController {
 
 	private ChargeItemService chargeItemService;

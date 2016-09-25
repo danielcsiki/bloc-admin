@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html lang="en" xmlns:th="http://www.thymeleaf.org"> 
 <head> 
-     <title>Users</title> 
+     <title>Charge Items</title> 
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
  
  
@@ -19,35 +19,33 @@
 </head> 
 <body> 
 <div class="container">
-<h2>User List</h2> 
-     <div th:if="${not #lists.isEmpty(users)}"> 
+<h2>Charge Item List</h2> 
+     <div th:if="${not #lists.isEmpty(chargeItems)}"> 
          <table class="table table-striped"> 
              <tr> 
                  <th>Id</th> 
-                 <th>User Name</th>
-                 <th>First Name</th> 
-                 <th>Last Name</th>
+                 <th>Expense Item</th> 
+                 <th>Amount</th> 
+                 <th>Cost</th>
                  <th>View</th>
                  <th>Edit</th>
-                 <th>Delete</th>
-                 <th>Charge Item</th> 
+                 <th>Delete</th> 
              </tr> 
-             <tr th:each="user : ${users}"> 
-                 <td th:text="${user.id}"></td> 
-                 <td th:text="${user.username}"></td>
-                 <td th:text="${user.apartment.firstName}"></td> 
-                 <td th:text="${user.apartment.lastName}"></td>
-                 <td><a th:href="${'/user/show/' + user.id}">View</a> </td>
-                 <td><a th:href="${'/user/edit/' + user.id}">Edit</a> </td>
-                 <td><a th:href="${'/user/delete/' + user.id}">Delete</a> </td>
-                 <td><a th:href="${'/user/chargeItem'}">Charge Item</a> </td> 
+             <tr th:each="chargeItem : ${chargeItems}"> 
+                 <td th:text="${chargeItem.id}"></td> 
+                 <td th:text="${chargeItem.expense}"></td> 
+                 <td th:text="${chargeItem.amount}"></td> 
+                 <td th:text="${chargeItem.cost}"></td>
+                 <td><a th:href="${'/user/chargeItem/show/' + chargeItem.id}">View</a> </td>
+                 <td><a th:href="${'/user/chargeItem/edit/' + chargeItem.id}">Edit</a> </td>
+                 <td><a th:href="${'/user/chargeItem/delete/' + chargeItem.id}">Delete</a> </td> 
              </tr> 
          </table> 
      </div>
      <div class="row"> 
          <div class="col-sm-3"> 
-             <a href="/user/add">Add User</a> 
-         </div>
+             <a href="/user/chargeItem/add">Add Charge Item</a> 
+         </div> 
      </div> 
 </div> 
 </body> 

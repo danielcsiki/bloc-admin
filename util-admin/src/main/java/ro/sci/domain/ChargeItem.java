@@ -8,8 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 /**
  * @author yellow
  *
@@ -19,9 +17,7 @@ public class ChargeItem extends AbstractModel {
 
 	@ManyToOne
 	private Charge charge;
-
 	@OneToOne
-	@NotEmpty
 	private Expense expense;
 	@NotNull
 	private Integer amount;
