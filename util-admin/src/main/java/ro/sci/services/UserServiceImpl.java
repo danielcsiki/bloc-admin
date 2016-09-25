@@ -112,4 +112,14 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ro.sci.services.UserService#findByUserName(java.lang.Object)
+	 */
+	@Override
+	public User findByUserName(String userName) {
+		return userRepository.findByUsername(userName);
+	}
+
 }

@@ -14,4 +14,6 @@ public interface UserService extends CrudService<User> {
 
 	UserForm saveUserForm(UserForm userForm);
 
+	User findByUserName(String userName);
+
 }
