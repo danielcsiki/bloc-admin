@@ -25,8 +25,12 @@ public class ChargeItem extends AbstractModel {
 	private Float cost;
 
 	public Float getCost() {
-		cost = expense.getUnitPrice() * amount;
-		return cost;
+		if (!expense.getItem().equals(null) || amount == 0) {
+			cost = expense.getUnitPrice() * amount;
+			return cost;
+		} else {
+			return 0f;
+		}
 	}
 
 	public void setCost(Float cost) {

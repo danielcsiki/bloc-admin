@@ -118,8 +118,8 @@ public class UserServiceImpl implements UserService {
 	 * @see ro.sci.services.UserService#findByUserName(java.lang.Object)
 	 */
 	@Override
-	public User findByUserName(String userName) {
-		return userRepository.findByUsername(userName);
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 
 }
