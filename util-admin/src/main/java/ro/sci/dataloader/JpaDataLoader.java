@@ -66,6 +66,7 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 		loadInvoices();
 		loadRoles();
 		assignUsersToDefaultRole();
+		assignUsersToAdminRole();
 	}
 
 	private void loadExpenses() {
@@ -100,7 +101,7 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 
 		User user1 = new User();
 		user1.setUsername("usernameone");
-		user1.setPassword("passwordone");
+		user1.setPassword("pwone");
 
 		Apartment apartment1 = new Apartment();
 		apartment1.setNr(9);
@@ -116,7 +117,7 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 
 		User user2 = new User();
 		user2.setUsername("usernametwo");
-		user2.setPassword("passwordtwo");
+		user2.setPassword("pwtwo");
 
 		Apartment apartment2 = new Apartment();
 		apartment2.setNr(10);
@@ -132,7 +133,7 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 
 		User user3 = new User();
 		user3.setUsername("usernamethree");
-		user3.setPassword("passwordthree");
+		user3.setPassword("pwthree");
 
 		Apartment apartment3 = new Apartment();
 		apartment3.setNr(11);
@@ -195,6 +196,64 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 
 	}
 
+	private void loadInvoices() {
+
+		List<User> users = userService.listAll();
+		List<Expense> expenses = expenseService.listAll();
+
+		users.forEach(user -> {
+			Invoice invoice = new Invoice();
+			invoice.setApartment(user.getApartment());
+
+			expenses.forEach(expense -> {
+				InvoiceItem invoiceItem = new InvoiceItem();
+				invoiceItem.setExpense(expense);
+				invoice.addInvoiceItem(invoiceItem);
+			});
+			invoiceService.save(invoice);
+		});
+	}
+
+	private void loadRoles() {
+		Role role = new Role();
+		role.setRole("OWNER");
+		roleService.save(role);
+
+		Role adminRole = new Role();
+		adminRole.setRole("ADMIN");
+		roleService.save(adminRole);
+	}
+
+	private void assignUsersToDefaultRole() {
+		List<Role> roles = roleService.listAll();
+		List<User> users = userService.listAll();
+
+		roles.forEach(role -> {
+			if (role.getRole().equalsIgnoreCase("OWNER")) {
+				users.forEach(user -> {
+					user.addRole(role);
+					userService.save(user);
+				});
+			}
+		});
+	}
+
+	private void assignUsersToAdminRole() {
+		List<Role> roles = (List<Role>) roleService.listAll();
+		List<User> users = (List<User>) userService.listAll();
+
+		roles.forEach(role -> {
+			if (role.getRole().equalsIgnoreCase("ADMIN")) {
+				users.forEach(user -> {
+					if (user.getUsername().equals("usernameone")) {
+						user.addRole(role);
+						userService.save(user);
+					}
+				});
+			}
+		});
+	}
+
 	// private void loadCharges() {
 	//
 	// List<User> users = userService.listAll();
@@ -227,43 +286,5 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 	// invoiceService.save(invoice);
 	// });
 	// }
-
-	private void loadInvoices() {
-
-		List<User> users = userService.listAll();
-		List<Expense> expenses = expenseService.listAll();
-
-		users.forEach(user -> {
-			Invoice invoice = new Invoice();
-			invoice.setApartment(user.getApartment());
-
-			expenses.forEach(expense -> {
-				InvoiceItem invoiceItem = new InvoiceItem();
-				invoiceItem.setExpense(expense);
-				invoice.addInvoiceItem(invoiceItem);
-			});
-			invoiceService.save(invoice);
-		});
-	}
-
-	private void loadRoles() {
-		Role role = new Role();
-		role.setRole("REZIDENT");
-		roleService.save(role);
-	}
-
-	private void assignUsersToDefaultRole() {
-		List<Role> roles = roleService.listAll();
-		List<User> users = userService.listAll();
-
-		roles.forEach(role -> {
-			if (role.getRole().equalsIgnoreCase("REZIDENT")) {
-				users.forEach(user -> {
-					user.addRole(role);
-					userService.save(user);
-				});
-			}
-		});
-	}
 
 }
