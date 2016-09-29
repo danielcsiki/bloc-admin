@@ -28,7 +28,6 @@ import ro.sci.services.UserService;
 public class UserController {
 
 	private UserService userService;
-
 	private UserToUserForm userToUserForm;
 	private UserFormValidator userFormValidator;
 

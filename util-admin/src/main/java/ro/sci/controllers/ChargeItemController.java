@@ -31,7 +31,7 @@ public class ChargeItemController {
 		this.chargeItemService = chargeItemService;
 	}
 
-	@RequestMapping("/list")
+	@RequestMapping("list")
 	public String listChargeItems(Model model) {
 		model.addAttribute("chargeItems", chargeItemService.listAll());
 		return "chargeItem/list";

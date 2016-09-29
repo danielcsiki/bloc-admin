@@ -11,6 +11,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author yellow
@@ -19,13 +22,14 @@ import javax.persistence.OneToOne;
 @Entity
 public class Finance extends AbstractModel {
 
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date chargeDate;
 	private Float chargeSum;
+	@NotNull
 	private Float payment;
 	private Float balance;
 	@OneToOne
 	private User user;
-
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "finance", orphanRemoval = true)
 	private List<Charge> charges = new ArrayList<>();
 

@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * @author yellow
  *
@@ -20,16 +22,13 @@ import javax.persistence.OneToOne;
 @Entity
 public class Charge extends AbstractModel {
 
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date chargeDate;
-
 	private Float chargeSum;
-
 	@OneToOne
 	private User user;
-
 	@ManyToOne
 	private Finance finance;
-
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "charge", orphanRemoval = true)
 	private List<ChargeItem> chargeItems = new ArrayList<>();
 
