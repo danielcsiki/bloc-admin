@@ -78,23 +78,23 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 		expenseService.save(expense1);
 
 		Expense expense2 = new Expense();
-
 		expense2.setItem("Apa pluviala");
 		expense2.setUnitReference("Apartament");
 		expense2.setUnitPrice(3.28f);
 		expenseService.save(expense2);
-		Expense expense3 = new Expense();
 
+		Expense expense3 = new Expense();
 		expense3.setItem("Salubritate");
 		expense3.setUnitReference("Persoane");
 		expense3.setUnitPrice(6.88f);
 		expenseService.save(expense3);
-		Expense expense4 = new Expense();
 
+		Expense expense4 = new Expense();
 		expense4.setItem("Servicii administrative");
 		expense4.setUnitReference("Apartament");
 		expense4.setUnitPrice(11.00f);
 		expenseService.save(expense4);
+
 		Expense expense5 = new Expense();
 		expense5.setItem("Apa canal");
 		expense5.setUnitReference("Index contor");
@@ -207,12 +207,22 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 		}
 
 		ChargeItem chargeItem1 = new ChargeItem();
+		try {
+			chargeItem1.setChargeDate(new SimpleDateFormat("dd/MM/yyyy").parse("01/09/2016"));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		chargeItem1.setExpense(expenses.get(0));
 		chargeItem1.setAmount(14);
 		chargeItem1.setCost(chargeItem1.getCost());
 		user.getCharge().addChargeItem(chargeItem1);
 
 		ChargeItem chargeItem2 = new ChargeItem();
+		try {
+			chargeItem2.setChargeDate(new SimpleDateFormat("dd/MM/yyyy").parse("01/09/2016"));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		chargeItem2.setExpense(expenses.get(1));
 		chargeItem2.setAmount(1);
 		chargeItem2.setCost(chargeItem2.getCost());
@@ -231,7 +241,7 @@ public class JpaDataLoader implements ApplicationListener<ContextRefreshedEvent>
 
 		finance.setChargeSum(finance.getChargeSum(charge));
 		finance.setPayment(100f);
-		finance.setBalance(finance.getBalance(charge));
+		finance.setBalance(finance.getBalance());
 		user.getFinance().addCharge(charge);
 
 		userService.save(user);

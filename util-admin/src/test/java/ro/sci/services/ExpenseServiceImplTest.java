@@ -62,7 +62,7 @@ public class ExpenseServiceImplTest {
 		assertEquals(fetchedExpense.getItem(), fetchedUpdatedExpense.getItem());
 
 		List<Expense> expenses = expenseService.listAll();
-		assert expenses.size() == 4;// see JpaDataLoader...
+		assert expenses.size() == 12;// see JpaDataLoader...
 
 	}
 

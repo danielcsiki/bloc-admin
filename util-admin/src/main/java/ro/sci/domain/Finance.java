@@ -24,7 +24,7 @@ public class Finance extends AbstractModel {
 
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date chargeDate;
-	private Float chargeSum;
+	public Float chargeSum;
 	@NotNull
 	private Float payment;
 	private Float balance;
@@ -42,7 +42,9 @@ public class Finance extends AbstractModel {
 	}
 
 	public Float getChargeSum(Charge charge) {
-		chargeSum = charge.getChargeSum();
+		if (chargeDate.equals(charge.getChargeDate())) {
+			chargeSum = charge.getChargeSum();
+		}
 		return chargeSum;
 	}
 
@@ -58,8 +60,8 @@ public class Finance extends AbstractModel {
 		this.payment = payment;
 	}
 
-	public Float getBalance(Charge charge) {
-		balance = charge.getChargeSum() - payment;
+	public Float getBalance() {
+		balance = chargeSum - payment;
 		return balance;
 	}
 
@@ -84,21 +86,13 @@ public class Finance extends AbstractModel {
 	}
 
 	public void addCharge(Charge charge) {
-		if (chargeDate.equals(charge.getChargeDate())) {
-			charge.setFinance(this);
-			charges.add(charge);
-		} else {
-			throw new IllegalArgumentException("mismatch between charge and finance");
-		}
+		charge.setFinance(this);
+		charges.add(charge);
 	}
 
 	public void removeCharge(Charge charge) {
-		if (chargeDate.equals(charge.getChargeDate())) {
-			charge.setFinance(null);
-			charges.remove(charge);
-		} else {
-			throw new IllegalArgumentException("mismatch between charge and finance");
-		}
+		charge.setFinance(null);
+		charges.remove(charge);
 	}
 
 }

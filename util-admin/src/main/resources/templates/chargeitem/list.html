@@ -23,7 +23,8 @@
      <div th:if="${not #lists.isEmpty(chargeItems)}"> 
          <table class="table table-striped"> 
              <tr> 
-                 <th>Id</th> 
+                 <th>Id</th>
+                 <th>Charge Date</th>
                  <th>Expense Item</th> 
                  <th>Amount</th> 
                  <th>Cost</th>
@@ -32,7 +33,8 @@
                  <th>Delete</th> 
              </tr> 
              <tr th:each="chargeItem : ${chargeItems}"> 
-                 <td th:text="${chargeItem.id}"></td> 
+                 <td th:text="${chargeItem.id}"></td>
+                 <td th:text="${chargeItem.chargeDate}"></td> 
                  <td th:text="${chargeItem.expense.item}"></td> 
                  <td th:text="${chargeItem.amount}"></td> 
                  <td th:text="${chargeItem.cost}"></td>

@@ -77,13 +77,21 @@ public class Charge extends AbstractModel {
 	}
 
 	public void addChargeItem(ChargeItem chargeItem) {
-		chargeItem.setCharge(this);
-		chargeItems.add(chargeItem);
+		if (chargeDate.equals(chargeItem.getChargeDate())) {
+			chargeItem.setCharge(this);
+			chargeItems.add(chargeItem);
+		} else {
+			throw new IllegalArgumentException("mismatch between chargeItem and charge");
+		}
 	}
 
 	public void removeChargeItem(ChargeItem chargeItem) {
-		chargeItem.setCharge(null);
-		chargeItems.remove(chargeItem);
+		if (chargeDate.equals(chargeItem.getChargeDate())) {
+			chargeItem.setCharge(null);
+			chargeItems.remove(chargeItem);
+		} else {
+			throw new IllegalArgumentException("mismatch between chargeItem and charge");
+		}
 	}
 
 }
